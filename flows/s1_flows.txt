@@ -1,0 +1,16 @@
+# Denegar todo por defecto
+table=0,priority=0,actions=drop
+
+# Tenant A: intra-tenant (ARP + IP)
+table=0,priority=10,arp,arp_spa=10.0.1.0/24,arp_tpa=10.0.1.0/24,actions=NORMAL
+table=0,priority=10,ip,nw_src=10.0.1.0/24,nw_dst=10.0.1.0/24,actions=NORMAL
+
+# Tenant B: intra-tenant (ARP + IP)
+table=0,priority=10,arp,arp_spa=10.0.2.0/24,arp_tpa=10.0.2.0/24,actions=NORMAL
+table=0,priority=10,ip,nw_src=10.0.2.0/24,nw_dst=10.0.2.0/24,actions=NORMAL
+
+# Ambos tenants hacia el servicio compartido (vía fw) y retorno
+table=0,priority=10,ip,nw_src=10.0.1.0/24,nw_dst=10.0.3.0/24,actions=NORMAL
+table=0,priority=10,ip,nw_src=10.0.2.0/24,nw_dst=10.0.3.0/24,actions=NORMAL
+table=0,priority=10,ip,nw_src=10.0.3.0/24,nw_dst=10.0.1.0/24,actions=NORMAL
+table=0,priority=10,ip,nw_src=10.0.3.0/24,nw_dst=10.0.2.0/24,actions=NORMAL
