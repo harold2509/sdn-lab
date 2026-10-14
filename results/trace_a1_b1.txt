@@ -1,0 +1,10 @@
+Flow: ip,in_port=1,vlan_tci=0x0000,dl_src=00:00:00:00:00:00,dl_dst=00:00:00:00:00:00,nw_src=10.0.1.1,nw_dst=10.0.2.1,nw_proto=0,nw_tos=0,nw_ecn=0,nw_ttl=0,nw_frag=no
+
+bridge("s1")
+------------
+ 0. priority 0
+    drop
+
+Final flow: unchanged
+Megaflow: recirc_id=0,eth,ip,in_port=1,nw_src=10.0.1.0/24,nw_dst=10.0.2.0/24,nw_frag=no
+Datapath actions: drop
