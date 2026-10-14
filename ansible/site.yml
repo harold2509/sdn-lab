@@ -1,0 +1,14 @@
+- hosts: localhost
+  connection: local
+  become: true
+  vars_files: [vars.yml]
+  tasks:
+    - name: Generar flujos desde plantilla
+      ansible.builtin.template:
+        src: flows.j2
+        dest: /tmp/s1_flows.txt
+        trim_blocks: true
+        lstrip_blocks: true
+    - name: Aplicar politica (reemplaza toda la tabla)
+      ansible.builtin.command: ovs-ofctl -O OpenFlow13 replace-flows s1 /tmp/s1_flows.txt
+      changed_when: true

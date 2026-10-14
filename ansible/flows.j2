@@ -1,0 +1,9 @@
+table=0,priority=0,actions=drop
+{% for t in tenants %}
+table=0,priority=10,arp,arp_spa={{ t.subnet }},arp_tpa={{ t.subnet }},actions=NORMAL
+table=0,priority=10,ip,nw_src={{ t.subnet }},nw_dst={{ t.subnet }},actions=NORMAL
+{% for d in t.allowed %}
+table=0,priority=10,ip,nw_src={{ t.subnet }},nw_dst={{ d }},actions=NORMAL
+table=0,priority=10,ip,nw_src={{ d }},nw_dst={{ t.subnet }},actions=NORMAL
+{% endfor %}
+{% endfor %}
