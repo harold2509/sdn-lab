@@ -1,3 +1,4 @@
+e0fe9af parte 4:automatizacion con ansible y rollback
 a0b127c Revert "feat: agrega tenant C"
 493e910 mediciones de provision con tenant C
 8538d00 feat: agrega tenant C
